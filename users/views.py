@@ -13,7 +13,7 @@ from .serializers import UserRegistrationSerializer
 
 
 class Home(TemplateView):
-    template_name = "account/home.html"
+    template_name = "users/home.html"
 
 class SignUp(CreateAPIView):
     model = get_user_model()
@@ -27,7 +27,7 @@ class SignUp(CreateAPIView):
     #     return super().create(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
-        return render(request=request, template_name='account/signup.html')
+        return render(request=request, template_name='users/signup.html')
 
     def post(self, request, *args, **kwargs):
         user = self.create(request, *args, **kwargs)

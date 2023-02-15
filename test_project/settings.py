@@ -32,7 +32,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'account.apps.AccountConfig',
+    'users.apps.AccountConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -151,7 +151,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = "account.User"
+AUTH_USER_MODEL = "users.User"
 
 # Accounts section.
 LOGIN_REDIRECT_URL = '/'
