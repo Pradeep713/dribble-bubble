@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from dj_rest_auth.registration.views import RegisterView
 from allauth.account.views import confirm_email
+from users.serializers import UserRegistrationSerializer
+from users.views import CustomSignUp
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,5 +26,6 @@ urlpatterns = [
     path('', include("users.urls")),
     path('users/', include("rest_framework.urls")),
     path('users/dj-rest-auth/', include("dj_rest_auth.urls")),
+    path('users/dj-rest-auth/registration/', CustomSignUp.as_view(), name = 'register'),
     path('users/dj-rest-auth/registration/', include("dj_rest_auth.registration.urls"))
 ]

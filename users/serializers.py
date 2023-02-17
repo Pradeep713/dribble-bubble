@@ -50,6 +50,10 @@ class UserRegistrationSerializer(RegisterSerializer):
         data['role'] = self.validated_data.get('role', 3)
         return data
 
+    def custom_signup(self, request, user):
+        user.role = self.validated_data.get('role')
+        user.save(update_fields = ['role'])
+
 class UserLoginSerializer(serializers.ModelSerializer):
     email = serializers.EmailField()
     password = serializers.CharField(max_length = 128, write_only = True)
