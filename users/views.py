@@ -5,17 +5,18 @@ from django.views.generic import TemplateView
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView
 from rest_framework import permissions
 from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
 from rest_framework.response import Response
 
 from .models import User
-from .serializers import UserRegistrationSerializer
+from .serializers import UserRegistrationSerializer, UserLoginSerializer, UserSerializer
 
 
-class Home(TemplateView):
-    template_name = "users/home.html"
+class Home(ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 class SignUp(CreateAPIView):
     model = User

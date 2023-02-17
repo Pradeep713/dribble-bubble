@@ -2,8 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy, reverse
-import time
-import datetime
 
 class UserManager(BaseUserManager):
     '''User manager with no username but email.'''
@@ -15,7 +13,6 @@ class UserManager(BaseUserManager):
         email = self.normalize_email(email)
         user = self.model(email=email, role=role, **kwargs)
         user.set_password(password)
-    
         user.save(using = self._db)
         return user
 
@@ -44,9 +41,12 @@ class User(AbstractUser):
         (ADMIN, _('Admin User')),
         (SUPERADMIN, _('Super Admin User')),
     )
-    role = models.PositiveSmallIntegerField(_('user_type'), choices=USER_TYPE, default=NORMAL, null=True)
+    role = models.PositiveSmallIntegerField(_('user_type'), choices=USER_TYPE, default=NORMAL)
     username = None
     USERNAME_FIELD = 'email'
     email = models.EmailField(_('email address'), unique=True)
     REQUIRED_FIELDS = []
     objects = UserManager()
+
+    def __str__(self) -> str:
+        return self.email
