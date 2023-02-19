@@ -1,16 +1,10 @@
-import logging
-
 from .models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import update_last_login
 from rest_framework import serializers, validators
 from rest_framework_simplejwt.tokens import RefreshToken
-from allauth.account.adapter import get_adapter
-from allauth.account.utils import setup_user_email
 
 from dj_rest_auth.registration.serializers import RegisterSerializer
-from dj_rest_auth.serializers import UserDetailsSerializer
-from dj_rest_auth.models import api_settings
 
 
 class UserRegistrationSerializer(RegisterSerializer):
@@ -47,6 +41,7 @@ class UserLoginSerializer(serializers.ModelSerializer):
             'email',
             'role',
         )
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
