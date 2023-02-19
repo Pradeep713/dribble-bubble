@@ -10,28 +10,14 @@ from allauth.account.utils import setup_user_email
 
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from dj_rest_auth.serializers import UserDetailsSerializer
+from dj_rest_auth.models import api_settings
 
 
 class UserRegistrationSerializer(RegisterSerializer):
-    # email = serializers.EmailField(validators=[
-    #     validators.UniqueValidator(
-    #         queryset=User.objects.all(),
-    #         message="Sorry, This username is taken."
-    #     )],
-    #     required = True,
-    # )
-    # password = serializers.CharField(
-    #     max_length = 128,
-    #     write_only = True,
-    #     required = True,
-    #     style = {
-    #         'input_type' : 'password',
-    #         'placeholder' : 'password'
-    #     }
-    # )
-    # role = serializers.ChoiceField(
-    #     choices=User.USER_TYPE,
-    # )
+    role = serializers.ChoiceField(
+        choices=User.USER_TYPE,
+    )
+    username = None
     class Meta:
         model = User
         fields = (
@@ -50,9 +36,6 @@ class UserRegistrationSerializer(RegisterSerializer):
         data['role'] = self.validated_data.get('role', 3)
         return data
 
-    def custom_signup(self, request, user):
-        user.role = self.validated_data.get('role')
-        user.save(update_fields = ['role'])
 
 class UserLoginSerializer(serializers.ModelSerializer):
     email = serializers.EmailField()

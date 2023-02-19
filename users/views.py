@@ -43,3 +43,6 @@ class Home(ListAPIView):
 
 class CustomSignUp(RegisterView):
     serializer_class = UserRegistrationSerializer
+
+    def get_serializer_class(self):
+        return UserRegistrationSerializer

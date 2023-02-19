@@ -26,6 +26,6 @@ urlpatterns = [
     path('', include("users.urls")),
     path('users/', include("rest_framework.urls")),
     path('users/dj-rest-auth/', include("dj_rest_auth.urls")),
-    path('users/dj-rest-auth/registration/', CustomSignUp.as_view(), name = 'register'),
-    path('users/dj-rest-auth/registration/', include("dj_rest_auth.registration.urls"))
+    path('users/dj-rest-auth/registration/', CustomSignUp.as_view(), name = 'rest_register'),
+    path('users/dj-rest-auth/registration/', include("dj_rest_auth.registration.urls")),
 ]
